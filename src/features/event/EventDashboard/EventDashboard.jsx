@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Grid,Button } from "semantic-ui-react";
-import EventList from '../EventList/EventList';
+import  EventList from '../EventList/EventList';
 import EventForm from '../EventForm/EventForm';
+import cuid from 'cuid'
 
 const eventsDashboard = [
   {
@@ -53,8 +54,6 @@ const eventsDashboard = [
     ]
   }
 ]
-
-
 class EventDashboard extends Component {
 
     state={
@@ -72,7 +71,16 @@ class EventDashboard extends Component {
         isOpen: false
       })
     }
+    handleCreatEvent = (newEvent) => {
+      newEvent.id=cuid()
+      newEvent.hostPhotoURL='/assets/user.gng';
+      const updatedEvents= [...this.state.events,newEvent];
+      this.setState ({
+        events: updatedEvents,
+        isOpen: false
+      })
 
+    }
     render() {
         return (
             <div>
@@ -83,7 +91,7 @@ class EventDashboard extends Component {
                     <Grid.Column width={6}>
                         <Button onClick={this.handleFormOpen} positive content="Creat Event"/>
                         {this.state.isOpen &&
-                        <EventForm handleCancel={this.handleCancel}/>}
+                        <EventForm  creatEvent = {this.handleCreatEvent} handleCancel={this.handleCancel}/>}
                     </Grid.Column>
                 </Grid>
             </div>
