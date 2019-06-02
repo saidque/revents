@@ -24,7 +24,6 @@ function SettingsDashboard() {
                 <SettingNav/>
             </Grid.Column>
         </Grid>
-
     )
 }
 
